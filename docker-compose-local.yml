@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/x86_64
+    container_name: aorb
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    command:
+      - --character-set-server=utf8
+    volumes:
+      - ./docker-mysql/:/docker-entrypoint-initdb.d
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: test
+      MONGO_INITDB_DATABASE: test
+    volumes:
+      - ./docker-mongodb/mongodb-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    expose:
+      - "27017"
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+
+volumes:
+  maven-vol:
+  db-vol:
