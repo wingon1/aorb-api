@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.rest.core.annotation.RestResource;
+import sori.prt.aorb.domain.enums.ItemType;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,9 +35,11 @@ public class Post extends BaseTimeEntity{
 
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId")
-    private List<Item> items = new ArrayList<>();
+    private String itemA;
+
+    private String itemB;
+
+    private ItemType itemType;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "postId")
@@ -45,7 +48,10 @@ public class Post extends BaseTimeEntity{
     @Formula("(select count(1) from comment c where c.post_id = id)")
     private int totalCommentCount;
 
-    @Formula("(select count(1) from item_vote pv where pv.post_id = id)")
-    private int totalVoteCount;
+    @Formula("(select count(1) from item_vote pv where pv.select_item = 2 and pv.post_id = id )")
+    private int totalItemAVoteCount;
+
+    @Formula("(select count(1) from item_vote pv where pv.select_item = 1 and pv.post_id = id )")
+    private int totalItemBVoteCount;
 
 }

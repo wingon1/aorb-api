@@ -3,6 +3,7 @@ package sori.prt.aorb.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sori.prt.aorb.domain.enums.Item;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,5 +26,5 @@ public class ItemVote extends BaseTimeEntity{
 
     private Long postId;
 
-    private Long itemId;
+    private Item selectItem;
 }
