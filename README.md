@@ -1,6 +1,6 @@
 ﻿# aorb-api
 
-웹 밸런스게임 aorb-api 입니다.  
+웹 밸런스게임 aorb-api 입니다.  Spring Data Rest을 활용하여 개발 하였습니다
 
 1. docker-compose.yml 파일을 실행해주세오
 
